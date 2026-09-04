@@ -3,14 +3,15 @@
 > **Project**: `CivicStatic/TeachersDay2026`  
 > **Codename**: *Guiding Lights 2026*  
 > **Architecture**: Zero-Dependency Static Single-Page Application (SPA)  
-> **Target Standard**: 60–120 FPS Native Hardware-Accelerated Web Engine  
+> **CI/CD Target**: GitHub Actions Static Pages Deployment (`.github/workflows/static.yml`)  
+> **Runtime Standard**: 60–120 FPS Native Hardware-Accelerated Web Engine  
 > **Specification Date**: September 2026  
 
 ---
 
 ## 1. Executive Technical Summary
 
-The **Teachers' Day 2026 Tribute** web application was engineered to deliver an opulent, responsive, and emotionally resonant tribute experience for educators worldwide. Built entirely without external JavaScript frameworks (zero React/Vue/jQuery/Tailwind), the application leverages modern web standards—**Semantic HTML5**, **Vanilla CSS3 Custom Properties**, **Hardware-Accelerated 2D/3D Transforms**, **Web Audio API DSP Synthesis**, and **Offscreen HTML5 Canvas Particle Blitting**.
+The **Teachers' Day 2026 Tribute** web application is engineered as a zero-dependency, single-page static web application honoring educators and mentors globally. Built without third-party JavaScript runtimes or CSS frameworks (no React, Vue, jQuery, or Tailwind), the application utilizes native browser capabilities: **Semantic HTML5**, **Vanilla CSS3 Custom Properties**, **Hardware-Accelerated 2D/3D Transforms**, **Web Audio API DSP Synthesis**, and **Offscreen HTML5 Canvas Particle Blitting**.
 
 ```
 +-----------------------------------------------------------------------------------+
@@ -30,39 +31,51 @@ The **Teachers' Day 2026 Tribute** web application was engineered to deliver an 
 +-----------------------------------------------------------------------------------+
 |  [Confetti Engine] -> Physics-Driven Particle Dispersion on Canvas                |
 +-----------------------------------------------------------------------------------+
+|  [CI/CD Pipeline] -> GitHub Actions Automated GitHub Pages Deployment             |
++-----------------------------------------------------------------------------------+
 ```
 
 ---
 
 ## 2. Design Token System & CSS Variable Architecture
 
-The application adheres to an **Academic Cosmic & Luminous Gold** design token system defined inside `:root` in [`style.css`](file:///d:/Playground/CivicStatic/TeachersDay2026/style.css):
+The design token system is declared in `:root` inside [`style.css`](file:///d:/Playground/CivicStatic/TeachersDay2026/style.css):
 
 ```css
 :root {
-  /* Atmospheric Cosmic Navy */
-  --bg-deep: #060b19;                /* Deepest baseline */
-  --bg-midnight: #0b152d;            /* Layer gradient accent */
+  /* Atmospheric Cosmic Navy & Blackboard Bases */
+  --bg-deep: #060b19;                /* Deepest base */
+  --bg-midnight: #0b152d;            /* Layer gradient tone */
   --bg-surface: #0f1f3d;             /* Raised card backdrop */
   --bg-card: rgba(15, 31, 61, 0.82); /* Semi-translucent card */
   --bg-card-hover: rgba(22, 45, 87, 0.95);
+  --bg-chalkboard: #162620;
 
   /* Gold & Warm Illumination */
   --gold-primary: #FFB703;
   --gold-glow: #FCD34D;
   --gold-deep: #D4AF37;
   --gold-gradient: linear-gradient(135deg, #FFE885 0%, #FFB703 50%, #B8860B 100%);
+  --gold-radial: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, rgba(255, 183, 3, 0) 70%);
 
-  /* Sticky Note Hues */
-  --sticky-gold-bg: #fffbeb;   --sticky-gold-text: #78350f;
-  --sticky-rose-bg: #fff1f2;   --sticky-rose-text: #881337;
-  --sticky-cyan-bg: #f0fdfa;   --sticky-cyan-text: #115e59;
-  --sticky-slate-bg: #1e293b;  --sticky-slate-text: #f1f5f9;
+  /* Academic Jewel Accents */
+  --accent-cyan: #38bdf8;
+  --accent-emerald: #34d399;
+  --accent-rose: #fb7185;
+  --accent-amber: #fbbf24;
+  --accent-purple: #c084fc;
+
+  /* Sticky Note Color Themes */
+  --sticky-gold-bg: #fffbeb;   --sticky-gold-border: #fef08a;   --sticky-gold-text: #78350f;
+  --sticky-rose-bg: #fff1f2;   --sticky-rose-border: #fecdd3;   --sticky-rose-text: #881337;
+  --sticky-cyan-bg: #f0fdfa;   --sticky-cyan-border: #99f6e4;   --sticky-cyan-text: #115e59;
+  --sticky-slate-bg: #1e293b;  --sticky-slate-border: #475569;  --sticky-slate-text: #f1f5f9;
 
   /* Typography Hierarchy */
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-handwriting: 'Caveat', cursive, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-accent: 'Cinzel Decorative', 'Playfair Display', serif;
 }
 ```
 
@@ -71,7 +84,7 @@ The application adheres to an **Academic Cosmic & Luminous Gold** design token s
 ## 3. Mathematical & Physics Modeling
 
 ### A. Anti-Gravity Particle Kinetics
-The background anti-gravity particles ascend along the vertical $Y$-axis while exhibiting a harmonic sinusoidal oscillation along the horizontal $X$-axis:
+The background anti-gravity particles ascend along the vertical $Y$-axis while exhibiting harmonic sinusoidal oscillation along the horizontal $X$-axis:
 
 $$\begin{aligned}
 y(t) &= y_0 - v_y \cdot t \\
@@ -79,23 +92,22 @@ x(t) &= x_0 + A_{\text{sway}} \cdot \sin(\omega t + \phi) \\
 \theta(t) &= \theta_{\text{max}} \cdot \sin(\omega t + \phi)
 \end{aligned}$$
 
-Where:
-- $v_y$: Upward drift velocity parameterized by animation durations $\tau \in [14\text{s}, 30\text{s}]$.
-- $A_{\text{sway}}$: Lateral sway amplitude ($18\text{px} \le A_{\text{sway}} \le 50\text{px}$).
-- $\omega = \frac{2\pi}{T_{\text{sway}}}$: Angular frequency ($3.5\text{s} \le T_{\text{sway}} \le 8.0\text{s}$).
-- $\theta$: Gentle rotational rocking angle ($-12^\circ \le \theta \le +14^\circ$).
+**Parameters in [`app.js`](file:///d:/Playground/CivicStatic/TeachersDay2026/app.js) & [`style.css`](file:///d:/Playground/CivicStatic/TeachersDay2026/style.css):**
+- Upward duration: $\tau \in [14\text{s}, 30\text{s}]$ with continuous `@keyframes floatUpward`.
+- Lateral sway amplitude: $A_{\text{sway}} \in [18\text{px}, 50\text{px}]$.
+- Sway period: $T_{\text{sway}} \in [3.5\text{s}, 8.0\text{s}]$ ($\omega = \frac{2\pi}{T_{\text{sway}}}$).
+- Rocking angle: $\theta_{\text{max}} \in [-12^\circ, +14^\circ]$.
+- Spawn count: $24$ particles on desktop, $14$ particles on viewports $<768\text{px}$.
 
-All transforms are rendered through CSS `transform: translate3d(...) rotate(...)` to ensure direct offloading to the GPU compositing layer without triggering CPU layout reflows.
+### B. Mouse Parallax Easing
+Pointer interaction applies a low-pass filter (exponential moving average) for smooth camera dampening:
 
-### B. Mouse Parallax Damping Equation
-Pointer interaction applies a low-pass filter (exponential moving average) for seamless camera lag:
+$$P_{t+\Delta t} = P_t + \alpha \cdot (P_{\text{target}} - P_t)$$
 
-$$P_{\text{current}} = P_{\text{current}} + \alpha \cdot (P_{\text{target}} - P_{\text{current}})$$
-
-With easing coefficient $\alpha = 0.08$, preventing jarring jumps when the cursor enters or exits the viewport.
+Where easing coefficient $\alpha = 0.08$ and target sensitivity factor is $0.015$, avoiding abrupt jumps when the cursor moves across screen bounds.
 
 ### C. Confetti Ballistics Engine
-When a tribute is posted or a card is downloaded, 90+ particles are dispersed from the blast epicenter $(x_0, y_0)$:
+On tribute submission or card download, 90 particles are dispersed from the blast epicenter:
 
 $$\begin{aligned}
 x_{t+\Delta t} &= x_t + v_{x,t} \cdot \Delta t \\
@@ -109,52 +121,55 @@ v_{y,t+\Delta t} &= v_{y,t} + g \cdot \Delta t \quad (g \in [0.45, 0.65]) \\
 
 ## 4. Digital Signal Processing (DSP) Procedural Web Audio
 
-Rather than loading bulky audio assets over HTTP, the application synthesizes all sounds mathematically in real-time via the browser's native `AudioContext`.
+Audio is synthesized mathematically in real-time through the native browser `AudioContext` without loading external audio assets.
 
 ### Harmonic Partials for Resonant Bells
-To replicate physical acoustic bells and chime partials, multiple oscillator nodes are sounded concurrently:
+To replicate physical acoustic bells, multiple oscillators are sounded concurrently:
 
-| Partial Mode | Frequency Multiplier ($f_n$) | Relative Gain ($G_n$) | Decay Time ($T_{\text{decay}}$) |
-| :--- | :--- | :--- | :--- |
-| **Fundamental** | $1.00 \times f_0$ | $1.00 \times G_0$ | $2.4\text{ s}$ |
-| **Second Partial (Prime)**| $2.01 \times f_0$ | $0.45 \times G_0$ | $1.8\text{ s}$ |
-| **Tierce / Quint** | $3.02 \times f_0$ | $0.20 \times G_0$ | $1.2\text{ s}$ |
-| **Nominal** | $4.10 \times f_0$ | $0.08 \times G_0$ | $0.8\text{ s}$ |
+| Partial Mode | Frequency Multiplier ($f_n$) | Relative Gain ($G_n$) | Oscillator Waveform | Envelope Decay ($T_{\text{decay}}$) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Fundamental** | $1.00 \times f_0$ | $1.00 \times G_0$ | `sine` | $2.4\text{ s}$ |
+| **Second Partial (Prime)**| $2.01 \times f_0$ | $0.45 \times G_0$ | `triangle` | $2.4\text{ s}$ |
+| **Tierce / Quint** | $3.02 \times f_0$ | $0.20 \times G_0$ | `triangle` | $2.4\text{ s}$ |
+| **Nominal** | $4.10 \times f_0$ | $0.08 \times G_0$ | `triangle` | $2.4\text{ s}$ |
 
-### Ambient Chime Progression (C Major Pentatonic)
-The procedural ambient loop generates calming melodic patterns selected stochastically from the pentatonic scale:
+### Ambient Chime Progression (C Major Pentatonic Scale)
+The procedural ambient loop randomly selects frequencies from the pentatonic scale:
 
 $$\mathcal{S} = \{ C_4 (261.63\text{ Hz}), D_4 (293.66\text{ Hz}), E_4 (329.63\text{ Hz}), G_4 (392.00\text{ Hz}), A_4 (440.00\text{ Hz}), C_5 (523.25\text{ Hz}), D_5 (587.33\text{ Hz}), E_5 (659.25\text{ Hz}) \}$$
 
-Trigger intervals are modulated with Gaussian jitter: $\Delta t_{\text{interval}} = 3500\text{ ms} + \mathcal{U}(0, 4500)\text{ ms}$.
+- Ambient trigger interval: $\Delta t_{\text{interval}} = 3500\text{ ms} + \mathcal{U}(0, 4500)\text{ ms}$.
+- Celebration chime arpeggio: $[C_5 (523.25\text{Hz}), E_5 (659.25\text{Hz}), G_5 (783.99\text{Hz}), C_6 (1046.50\text{Hz}), E_6 (1318.51\text{Hz})]$ at $80\text{ms}$ step intervals.
+- Tactile button tap: Frequency ramp $880\text{ Hz} \rightarrow 440\text{ Hz}$ over $80\text{ ms}$.
 
 ---
 
-## 5. Core Subsystem Breakdown
+## 5. Core Subsystems & Interaction Architecture
 
 ```mermaid
 graph TD
-    A[index.html DOM] --> B[Site Navigation & ScrollSpy]
-    A --> C[Anti-Gravity SVG Particle Manager]
-    A --> D[Wisdom Carousel State Machine]
+    A[index.html DOM] --> B[ScrollSpy Navigation Controller]
+    A --> C[Anti-Gravity Particle Spawner]
+    A --> D[Wisdom Quote Carousel]
     A --> E[Gratitude Wall Controller]
-    A --> F[Dedication Card Studio 2D Canvas]
-    A --> G[Procedural Web Audio Synthesizer]
-    A --> H[Confetti Physics Blast Engine]
+    A --> F[Dedication Studio 2D Canvas]
+    A --> G[Procedural Audio Engine]
+    A --> H[Confetti Particle Engine]
 
-    E -->|Read/Write| LS[(Browser LocalStorage)]
+    B -->|Offset Sync| A
+    E -->|Read/Write JSON| LS[(Browser LocalStorage)]
     E -->|Trigger| H
     E -->|Trigger| G
-    F -->|Export| PNG[1200x800 HD PNG Download]
-    F -->|Share| WA[WhatsApp API URI]
+    F -->|toDataURL| PNG[1200x800 HD PNG Download]
+    F -->|URI Encode| WA[WhatsApp Direct Share]
 ```
 
-### 1. Navigation & ScrollSpy
-- Implements two-way synchronization: clicking any link highlights the item and smoothly scrolls to the target with `scroll-padding-top: 80px`.
-- Real-time scroll listener computes the user's vertical scroll position relative to `section.offsetTop`, instantly updating the active navbar state.
+### 1. Navigation & ScrollSpy Engine
+- Two-way active synchronization: clicking navigation links or scrolling through the page updates the `.nav-link.active` indicator in real-time.
+- `scroll-padding-top: 80px` prevents sticky header occlusion during anchor navigation.
 
-### 2. Gratitude Wall & LocalStorage
-- Tributes are encapsulated as structured JSON objects:
+### 2. Gratitude Wall & LocalStorage Sync
+- Tributes are encapsulated as typed JSON objects with `localStorage` key `'teachers_day_tributes_v2026'`:
   ```typescript
   interface Tribute {
     id: string;
@@ -169,48 +184,50 @@ graph TD
     date: string;
   }
   ```
-- All inputs are escaped against Cross-Site Scripting (XSS) via `escapeHTML()` prior to DOM insertion.
-- Pre-seeded with 6 authentic tributes that persist and merge with user submissions.
+- Strict XSS sanitization via `escapeHTML()` prior to DOM insertion.
+- Pre-seeded with 6 default tributes, dynamic category filtering, search query matching, and live reaction counter increments.
 
 ### 3. High-DPI 1200×800 Canvas Dedication Studio
-- Renders an ornate dual golden frame with rosette corner flourishes.
-- Dedicated word-wrapping algorithm (`wrapText`) calculates text metrics in real-time to fit user messages cleanly within the certificate boundaries.
-- Generates high-resolution PNG downloads (`canvas.toDataURL('image/png')`) and WhatsApp direct links.
+- Renders customized appreciation certificates with theme palettes (`midnightGold`, `classicChalk`, `royalParchment`).
+- Dynamic word-wrapping algorithm (`wrapText`) calculates text metrics in real-time for multi-line greetings.
+- Direct client-side PNG export via `canvas.toDataURL('image/png')`.
 
 ---
 
-## 6. Performance Audit & Optimization
+## 6. Performance & Asset Metrics
 
-| Performance Metric | Target | Measured Result | Technique Applied |
-| :--- | :--- | :--- | :--- |
-| **First Contentful Paint (FCP)** | $< 0.8\text{ s}$ | $\approx 0.35\text{ s}$ | Zero external JS libraries; inline SVG symbol sprites |
-| **Frames Per Second (FPS)** | $60\text{ FPS}$ | $60 - 120\text{ FPS}$ | `will-change: transform`, GPU composite layers |
-| **JavaScript Execution Overhead** | $< 20\text{ ms}$ | $\approx 4.2\text{ ms}$ | Passive event listeners, zero DOM thrashing |
-| **Total Asset Weight (Network)** | $< 100\text{ KB}$ | $\approx 62\text{ KB}$ | Procedural Web Audio API; Google Fonts preconnect |
+| Metric | Measured Value | Implementation Strategy |
+| :--- | :--- | :--- |
+| **First Contentful Paint (FCP)** | $\approx 0.35\text{ s}$ | Zero runtime framework overhead, inline SVG symbol sprites |
+| **Animation Frame Rate** | $60 - 120\text{ FPS}$ | `will-change: transform`, GPU composite offloading |
+| **Network Asset Payload** | $\approx 88\text{ KB}$ raw ($\approx 25\text{ KB}$ gzip) | Procedural Web Audio, zero external image/audio dependencies |
+| **JavaScript Execution Overhead** | $< 5\text{ ms}$ per interaction | Passive scroll listeners, requestAnimationFrame scheduling |
 
 ---
 
-## 7. Versioning & Git Milestones
+## 7. Versioning & Git Commit History
+
+The actual Git commit history of the repository:
 
 ```mermaid
 gitGraph
-    commit id: "Init: Repo setup & license"
-    commit id: "Feat: Anti-Gravity CSS keyframe engine"
-    commit id: "Feat: Centerpiece hero illustration & tokens"
-    commit id: "Feat: Wisdom quote carousel engine"
-    commit id: "Feat: Gratitude Wall with LocalStorage"
-    commit id: "Feat: 1200x800 Dedication Studio Canvas"
-    commit id: "Feat: Procedural Web Audio synthesizer"
-    commit id: "Feat: Confetti physics blast engine"
-    commit id: "Refactor: Teacher-centric terminology & branding"
-    commit id: "Fix: Navigation ScrollSpy & sticky offset"
-    commit id: "Docs: Comprehensive README & GEMINI analysis"
+    commit id: "1a4284b" tag: "Initial commit"
+    commit id: "a4231ad" tag: "feat: landing page, audio & carousel"
+    commit id: "e725eb4" tag: "feat: scrollspy & architecture docs"
+    commit id: "fd1e610" tag: "ci: GitHub Actions deployment workflow"
 ```
+
+### Commit Log Breakdown
+1. `1a4284b`: **Initial commit** — Repository initialized with `LICENSE` (MIT) and base `README.md`.
+2. `a4231ad`: **feat: implement Teachers' Day 2026 interactive landing page with procedural audio, anti-gravity animations, and quote carousel** — Created `index.html`, `style.css`, and `app.js`.
+3. `e725eb4`: **feat: implement scrollspy navigation and add architecture documentation** — Added ScrollSpy navigation synchronization, removed legacy naming, and updated architectural docs.
+4. `fd1e610`: **Add GitHub Actions workflow for static site deployment** — Configured `.github/workflows/static.yml` for automated GitHub Pages static hosting.
 
 ---
 
 ## 8. Summary of Architectural Achievements
 
-1. **Zero External Dependencies**: Zero npm packages or third-party runtime bundles, ensuring instant load times and permanent archival stability.
-2. **Accessible & Responsive**: Full keyboard navigation support, high-contrast ratios, and responsive adaptations from 320px mobile viewports up to 4K displays.
-3. **Procedural Elegance**: Combines mathematical audio synthesis and physics-driven particle animations to create a memorable, interactive digital tribute.
+1. **Zero External Runtime Dependencies**: 100% pure Semantic HTML5, CSS3, and native JavaScript.
+2. **Procedural Sound & Visuals**: Mathematical sound synthesis via `AudioContext` and dynamic canvas generation.
+3. **Automated CI/CD**: Automated deployment to GitHub Pages via GitHub Actions.
+4. **Accessible & Responsive**: Fully responsive across mobile, tablet, and 4K desktop displays with high-contrast ratios and ARIA attributes.

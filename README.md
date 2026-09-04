@@ -5,6 +5,7 @@
 [![Performance](https://img.shields.io/badge/Performance-60%20to%20120%20FPS-gold.svg)](#)
 [![Web Audio API](https://img.shields.io/badge/Audio-Procedural%20Web%20Audio-blue.svg)](#)
 [![Canvas Studio](https://img.shields.io/badge/Canvas%20Studio-1200x800%20HD%20Export-purple.svg)](#)
+[![CI/CD: GitHub Pages](https://img.shields.io/badge/CI%2FCD-GitHub%20Pages%20Automated-2ea44f.svg)](#)
 [![Responsive](https://img.shields.io/badge/Design-Mobile%20%26%20Desktop%20Ready-orange.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -12,9 +13,11 @@
 
 ## 📖 Overview
 
-**Teachers' Day 2026 (Guiding Lights)** is a modern, single-page tribute web application honoring educators, professors, and mentors across the globe.
+**Teachers' Day 2026 (Guiding Lights)** is a modern, static single-page tribute web application honoring educators, professors, and mentors across the globe.
 
-Built with **Zero-Dependency Architecture** (Pure Semantic HTML5, Vanilla CSS3, and Native ES6+ JavaScript), it pairs deep academic cosmic aesthetics with a continuous weightless **"Anti-Gravity"** background physics engine, an interactive **Wisdom Quote Carousel**, a **LocalStorage-backed Gratitude Wall**, a **Procedural Web Audio Synthesizer**, and a **Live High-DPI Greeting Card Studio**.
+Built with **Zero-Dependency Architecture** (Pure Semantic HTML5, Vanilla CSS3, and Native ES6+ JavaScript), it pairs deep academic cosmic aesthetics with a continuous weightless **"Anti-Gravity"** background physics engine, an interactive **Wisdom Quote Carousel**, a **LocalStorage-backed Gratitude Wall**, a **Procedural Web Audio Synthesizer**, and a **Live High-DPI 1200×800 Greeting Card Studio**.
+
+For in-depth mathematical modeling, physics equations, Web Audio DSP partials, and architectural specifications, see [**`GEMINI.md`**](GEMINI.md).
 
 ---
 
@@ -28,12 +31,13 @@ Built with **Zero-Dependency Architecture** (Pure Semantic HTML5, Vanilla CSS3, 
 - **Curated Palette**:
   - Deep Cosmic Navy: `#060B19`, `#0B152D`, `#0F1F3D`
   - Luminous Gold Gradients: `linear-gradient(135deg, #FFE885 0%, #FFB703 50%, #B8860B 100%)`
-  - Chalkboard Slate & Soft Cream: `#1E293B`, `#CBD5E1`, `#FFFDF8`
+  - Chalkboard Slate & Soft Cream: `#162620`, `#1E293B`, `#CBD5E1`, `#FFFDF8`
   - Sticky Note Themes: Golden Parchment, Velvet Rose, Mint Scholar, and Cosmic Slate.
 - **Harmonious Typography**:
   - `Playfair Display`: High-contrast serif for headings and quote cards.
   - `Caveat`: Natural handwriting aesthetic for pinned sticky notes.
   - `Plus Jakarta Sans`: Clean, modern sans-serif body typography.
+  - `Cinzel Decorative`: Refined classical heading accents.
 
 ### 3. 🧭 Responsive Navbar with ScrollSpy & Sticky Offset
 - **Active State Synchronization**: Nav links dynamically highlight both on click and during page scroll via real-time scroll offset detection.
@@ -103,9 +107,14 @@ Then navigate to `http://localhost:8000` in your browser.
 
 ```
 TeachersDay2026/
+├── .github/
+│   └── workflows/
+│       └── static.yml  # GitHub Actions CI/CD automated deployment to GitHub Pages
 ├── index.html          # Semantic HTML5 layout, inline SVG symbol library, accessible ARIA attributes
 ├── style.css           # CSS design tokens, anti-gravity animations, responsive grid/flexbox
 ├── app.js              # Web Audio synthesizer, quote carousel, gratitude wall, canvas studio, confetti
+├── GEMINI.md           # Engineering, mathematical & architectural analysis
+├── LICENSE             # MIT License
 └── README.md           # Comprehensive project documentation
 ```
 
