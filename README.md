@@ -75,6 +75,9 @@ For in-depth mathematical modeling, physics equations, Web Audio DSP partials, a
 ### 9. 🎉 Confetti Celebration Engine
 - Lightweight canvas physics particle system triggered upon pinning tributes or exporting greeting cards.
 
+### 10. 🌐 Full Open Graph & Social Sharing Meta
+- Complete suite of Open Graph (`og:*`), Twitter Card (`summary_large_image`), and Canonical tags with embedded $1200\times 630\text{ px}$ vector social preview cards for rich sharing on WhatsApp, Twitter/X, LinkedIn, and Facebook.
+
 ---
 
 ## 🚀 Getting Started
@@ -107,15 +110,21 @@ Then navigate to `http://localhost:8000` in your browser.
 
 ```
 TeachersDay2026/
+├── .agents/
+│   ├── rules/
+│   │   └── always-sync-docs.md # Mandatory rule to keep docs synced on every code change
+│   └── skills/
+│       └── sync-docs-on-change/
+│           └── SKILL.md        # Procedure for synchronizing README.md and GEMINI.md
 ├── .github/
 │   └── workflows/
-│       └── static.yml  # GitHub Actions CI/CD automated deployment to GitHub Pages
-├── index.html          # Semantic HTML5 layout, inline SVG symbol library, accessible ARIA attributes
-├── style.css           # CSS design tokens, anti-gravity animations, responsive grid/flexbox
-├── app.js              # Web Audio synthesizer, quote carousel, gratitude wall, canvas studio, confetti
-├── GEMINI.md           # Engineering, mathematical & architectural analysis
-├── LICENSE             # MIT License
-└── README.md           # Comprehensive project documentation
+│       └── static.yml          # GitHub Actions CI/CD automated deployment to GitHub Pages
+├── index.html                  # Semantic HTML5 layout, inline SVG symbol library, accessible ARIA attributes
+├── style.css                   # CSS design tokens, anti-gravity animations, responsive grid/flexbox
+├── app.js                      # Web Audio synthesizer, quote carousel, gratitude wall, canvas studio, confetti
+├── GEMINI.md                   # Engineering, mathematical & architectural analysis
+├── LICENSE                     # MIT License
+└── README.md                   # Comprehensive project documentation
 ```
 
 ---

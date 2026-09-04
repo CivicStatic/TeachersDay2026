@@ -192,6 +192,10 @@ graph TD
 - Dynamic word-wrapping algorithm (`wrapText`) calculates text metrics in real-time for multi-line greetings.
 - Direct client-side PNG export via `canvas.toDataURL('image/png')`.
 
+### 4. SEO, Open Graph & Social Metadata Architecture
+- **Semantic Metadata**: Full Open Graph (`og:*`), Twitter Card (`summary_large_image`), and Canonical tags configured for link preview fidelity across social networks.
+- **Dynamic Vector Social Banner**: Inlined $1200\times 630\text{ px}$ scalable SVG banner featuring the cosmic gradient backdrop, golden laurels, and academic icons without requesting external banner assets.
+
 ---
 
 ## 6. Performance & Asset Metrics
@@ -225,9 +229,36 @@ gitGraph
 
 ---
 
-## 8. Summary of Architectural Achievements
+## 8. Continuous Documentation Synchronization Subsystem
+
+To ensure that both [`README.md`](README.md) and [`GEMINI.md`](GEMINI.md) never drift out of sync with code changes, the repository incorporates an automated customization standard:
+
+```
++-----------------------------------------------------------------------------------+
+|                     AUTOMATED DOCUMENTATION SYNCHRONIZATION                       |
++-----------------------------------------------------------------------------------+
+|  [Trigger] -> Code changes in HTML, CSS, JS, CI/CD, or configuration              |
++-----------------------------------------------------------------------------------+
+|  [Rule] -> .agents/rules/always-sync-docs.md (Mandatory execution)                |
++-----------------------------------------------------------------------------------+
+|  [Skill] -> .agents/skills/sync-docs-on-change/SKILL.md                          |
+|             ├── Delta Analysis: Token changes, DSP changes, math changes          |
+|             ├── README.md Sync: Features, architecture tree, run instructions     |
+|             └── GEMINI.md Sync: Math models, DSP tables, tokens, commit log       |
++-----------------------------------------------------------------------------------+
+|  [Verification] -> Markdown links, LaTeX syntax, Mermaid rendering validation     |
++-----------------------------------------------------------------------------------+
+```
+
+- **Workspace Skill**: [`.agents/skills/sync-docs-on-change/SKILL.md`](.agents/skills/sync-docs-on-change/SKILL.md)
+- **Workspace Rule**: [`.agents/rules/always-sync-docs.md`](.agents/rules/always-sync-docs.md)
+
+---
+
+## 9. Summary of Architectural Achievements
 
 1. **Zero External Runtime Dependencies**: 100% pure Semantic HTML5, CSS3, and native JavaScript.
 2. **Procedural Sound & Visuals**: Mathematical sound synthesis via `AudioContext` and dynamic canvas generation.
 3. **Automated CI/CD**: Automated deployment to GitHub Pages via GitHub Actions.
 4. **Accessible & Responsive**: Fully responsive across mobile, tablet, and 4K desktop displays with high-contrast ratios and ARIA attributes.
+5. **Self-Documenting Architecture**: Guaranteed real-time synchronization between code, mathematical models, design tokens, and documentation.
