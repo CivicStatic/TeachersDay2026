@@ -122,6 +122,7 @@ TeachersDay2026/
 ├── index.html                  # Semantic HTML5 layout, inline SVG symbol library, accessible ARIA attributes
 ├── style.css                   # CSS design tokens, anti-gravity animations, responsive grid/flexbox
 ├── app.js                      # Web Audio synthesizer, quote carousel, gratitude wall, canvas studio, confetti
+├── og-image.jpg                # High-DPI 1200x675 raster social preview banner (Open Graph & Twitter)
 ├── GEMINI.md                   # Engineering, mathematical & architectural analysis
 ├── LICENSE                     # MIT License
 └── README.md                   # Comprehensive project documentation

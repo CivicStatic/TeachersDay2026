@@ -194,7 +194,7 @@ graph TD
 
 ### 4. SEO, Open Graph & Social Metadata Architecture
 - **Semantic Metadata**: Full Open Graph (`og:*`), Twitter Card (`summary_large_image`), and Canonical tags configured for link preview fidelity across social networks.
-- **Dynamic Vector Social Banner**: Inlined $1200\times 630\text{ px}$ scalable SVG banner featuring the cosmic gradient backdrop, golden laurels, and academic icons without requesting external banner assets.
+- **Raster Social Preview Banner**: High-resolution $1200\times 675\text{ px}$ JPEG image ([`og-image.jpg`](file:///d:/Playground/CivicStatic/TeachersDay2026/og-image.jpg)) in the repository root for universal compatibility across WhatsApp, Twitter/X, LinkedIn, Discord, and Facebook scrapers (which do not support SVG data-URIs).
 
 ---
 
