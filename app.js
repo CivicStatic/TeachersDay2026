@@ -878,8 +878,69 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.getElementById('backToTopBtn');
   const mobileNavToggle = document.getElementById('mobileNavToggle');
   const siteHeader = document.getElementById('siteHeader');
+  const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+  const trackedSections = ['hero', 'quotes', 'gratitude', 'studio'].map(id => document.getElementById(id)).filter(Boolean);
+
+  // Set active link helper
+  function setActiveNavLink(targetId) {
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === `#${targetId}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  // Click handler for all nav links
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      soundEngine.playSoftTap();
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const targetId = href.substring(1);
+        setActiveNavLink(targetId);
+      }
+      if (siteHeader) {
+        siteHeader.classList.remove('mobile-menu-open');
+      }
+    });
+  });
+
+  // Also bind Hero CTA and Explore buttons to update active link
+  const heroCtaBtn = document.getElementById('heroCtaBtn');
+  if (heroCtaBtn) {
+    heroCtaBtn.addEventListener('click', () => {
+      soundEngine.playSoftTap();
+      setActiveNavLink('gratitude');
+    });
+  }
+  const heroExploreBtn = document.getElementById('heroExploreBtn');
+  if (heroExploreBtn) {
+    heroExploreBtn.addEventListener('click', () => {
+      soundEngine.playSoftTap();
+      setActiveNavLink('quotes');
+    });
+  }
+
+  // ScrollSpy with IntersectionObserver / Scroll calculation
+  let isManualScroll = false;
+  function updateScrollSpy() {
+    const scrollPos = window.scrollY + 200; // offset for sticky header
+
+    // Check from bottom to top
+    for (let i = trackedSections.length - 1; i >= 0; i--) {
+      const section = trackedSections[i];
+      if (section && section.offsetTop <= scrollPos) {
+        setActiveNavLink(section.id);
+        break;
+      }
+    }
+  }
 
   window.addEventListener('scroll', () => {
+    // Back to top button visibility
     if (backToTopBtn) {
       if (window.scrollY > 400) {
         backToTopBtn.classList.add('visible');
@@ -887,11 +948,14 @@ document.addEventListener('DOMContentLoaded', () => {
         backToTopBtn.classList.remove('visible');
       }
     }
+    // Update active nav link on scroll
+    updateScrollSpy();
   }, { passive: true });
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
       soundEngine.playSoftTap();
+      setActiveNavLink('hero');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
@@ -899,12 +963,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileNavToggle && siteHeader) {
     mobileNavToggle.addEventListener('click', () => {
       siteHeader.classList.toggle('mobile-menu-open');
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        siteHeader.classList.remove('mobile-menu-open');
-      });
     });
   }
 
